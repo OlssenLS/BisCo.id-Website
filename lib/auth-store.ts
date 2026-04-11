@@ -1,6 +1,5 @@
 import { createHash } from "node:crypto";
-import { promises as fs } from "node:fs";
-import path from "node:path";
+import { createClient } from "@supabase/supabase-js";
 
 export type AccountType = "Business" | "Content Creator";
 
@@ -12,34 +11,42 @@ export type StoredUser = {
   createdAt: string;
 };
 
-const DATA_DIR = path.join(process.cwd(), "data");
-const USERS_FILE = path.join(DATA_DIR, "users.json");
+type SupabaseUserRow = {
+  username: string;
+  email: string;
+  type: AccountType;
+  password_hash: string;
+  created_at: string;
+};
+
+const supabaseUrl = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+const supabase =
+  supabaseUrl && supabaseServiceRoleKey
+    ? createClient(supabaseUrl, supabaseServiceRoleKey, {
+        auth: {
+          persistSession: false,
+          autoRefreshToken: false,
+        },
+      })
+    : null;
 
 function normalizeIdentity(value: string) {
   return value.trim().toLowerCase();
 }
 
+function assertSupabase() {
+  if (!supabase) {
+    throw new Error(
+      "Supabase is not configured. Set SUPABASE_URL (or NEXT_PUBLIC_SUPABASE_URL) and SUPABASE_SERVICE_ROLE_KEY."
+    );
+  }
+  return supabase;
+}
+
 export function hashPassword(password: string) {
   return createHash("sha256").update(password).digest("hex");
-}
-
-export async function getUsers(): Promise<StoredUser[]> {
-  try {
-    const raw = await fs.readFile(USERS_FILE, "utf-8");
-    const parsed = JSON.parse(raw) as StoredUser[];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (error) {
-    const typedError = error as NodeJS.ErrnoException;
-    if (typedError.code === "ENOENT") {
-      return [];
-    }
-    throw error;
-  }
-}
-
-export async function saveUsers(users: StoredUser[]) {
-  await fs.mkdir(DATA_DIR, { recursive: true });
-  await fs.writeFile(USERS_FILE, JSON.stringify(users, null, 2), "utf-8");
 }
 
 export async function addUser(input: {
@@ -48,32 +55,52 @@ export async function addUser(input: {
   type: AccountType;
   password: string;
 }) {
-  const users = await getUsers();
+  const supabaseClient = assertSupabase();
+
   const normalizedUsername = normalizeIdentity(input.username);
   const normalizedEmail = normalizeIdentity(input.email);
 
-  const duplicate = users.find(
-    (user) =>
-      normalizeIdentity(user.username) === normalizedUsername ||
-      normalizeIdentity(user.email) === normalizedEmail
-  );
+  const duplicateCheck = await supabaseClient
+    .from("app_users")
+    .select("username, email")
+    .or(`username.eq.${normalizedUsername},email.eq.${normalizedEmail}`)
+    .limit(1);
 
-  if (duplicate) {
+  if (duplicateCheck.error) {
+    throw duplicateCheck.error;
+  }
+
+  if (duplicateCheck.data.length > 0) {
     return { ok: false as const, error: "Username or email already exists." };
   }
 
-  const newUser: StoredUser = {
-    username: input.username.trim(),
-    email: input.email.trim(),
+  const rowToInsert: SupabaseUserRow = {
+    username: normalizedUsername,
+    email: normalizedEmail,
     type: input.type,
-    passwordHash: hashPassword(input.password),
-    createdAt: new Date().toISOString(),
+    password_hash: hashPassword(input.password),
+    created_at: new Date().toISOString(),
   };
 
-  users.push(newUser);
-  await saveUsers(users);
+  const insertResult = await supabaseClient
+    .from("app_users")
+    .insert(rowToInsert)
+    .select("username, email, type, password_hash, created_at")
+    .single();
 
-  return { ok: true as const, user: newUser };
+  if (insertResult.error) {
+    throw insertResult.error;
+  }
+
+  const insertedUser: StoredUser = {
+    username: insertResult.data.username,
+    email: insertResult.data.email,
+    type: insertResult.data.type,
+    passwordHash: insertResult.data.password_hash,
+    createdAt: insertResult.data.created_at,
+  };
+
+  return { ok: true as const, user: insertedUser };
 }
 
 export async function findUserForLogin(input: {
@@ -81,18 +108,51 @@ export async function findUserForLogin(input: {
   type: AccountType;
   password: string;
 }) {
-  const users = await getUsers();
+  const supabaseClient = assertSupabase();
   const normalizedIdentity = normalizeIdentity(input.identity);
   const passwordHash = hashPassword(input.password);
 
-  return (
-    users.find((user) => {
-      const isIdentityMatch =
-        normalizeIdentity(user.username) === normalizedIdentity ||
-        normalizeIdentity(user.email) === normalizedIdentity;
-      return (
-        isIdentityMatch && user.type === input.type && user.passwordHash === passwordHash
-      );
-    }) ?? null
-  );
+  const byUsernameResult = await supabaseClient
+    .from("app_users")
+    .select("username, email, type, password_hash, created_at")
+    .eq("username", normalizedIdentity)
+    .eq("type", input.type)
+    .maybeSingle();
+
+  if (byUsernameResult.error) {
+    throw byUsernameResult.error;
+  }
+
+  const byEmailResult = byUsernameResult.data
+    ? { data: null, error: null }
+    : await supabaseClient
+        .from("app_users")
+        .select("username, email, type, password_hash, created_at")
+        .eq("email", normalizedIdentity)
+        .eq("type", input.type)
+        .maybeSingle();
+
+  if (byEmailResult.error) {
+    throw byEmailResult.error;
+  }
+
+  const row = byUsernameResult.data ?? byEmailResult.data;
+
+  if (!row) {
+    return null;
+  }
+
+  if (row.password_hash !== passwordHash) {
+    return null;
+  }
+
+  const user: StoredUser = {
+    username: row.username,
+    email: row.email,
+    type: row.type,
+    passwordHash: row.password_hash,
+    createdAt: row.created_at,
+  };
+
+  return user;
 }

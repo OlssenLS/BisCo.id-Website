@@ -28,7 +28,23 @@ export async function POST(request: Request) {
     );
   }
 
-  const user = await findUserForLogin({ identity, password, type });
+  let user: Awaited<ReturnType<typeof findUserForLogin>>;
+
+  try {
+    user = await findUserForLogin({ identity, password, type });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error.";
+    return NextResponse.json(
+      {
+        ok: false,
+        error:
+          process.env.NODE_ENV === "development"
+            ? `Supabase error: ${message}`
+            : "Login is temporarily unavailable.",
+      },
+      { status: 500 }
+    );
+  }
 
   if (!user) {
     return NextResponse.json(

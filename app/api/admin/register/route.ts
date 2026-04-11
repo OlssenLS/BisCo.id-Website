@@ -40,7 +40,23 @@ export async function POST(request: Request) {
     );
   }
 
-  const created = await addUser({ username, email, type, password });
+  let created: Awaited<ReturnType<typeof addUser>>;
+
+  try {
+    created = await addUser({ username, email, type, password });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error.";
+    return NextResponse.json(
+      {
+        ok: false,
+        error:
+          process.env.NODE_ENV === "development"
+            ? `Supabase error: ${message}`
+            : "Registration is temporarily unavailable.",
+      },
+      { status: 500 }
+    );
+  }
 
   if (!created.ok) {
     return NextResponse.json({ ok: false, error: created.error }, { status: 409 });
