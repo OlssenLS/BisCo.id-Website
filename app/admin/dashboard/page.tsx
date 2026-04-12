@@ -126,13 +126,13 @@ export default function AdminDashboardPage() {
           </nav>
         </aside>
 
-        <div className="flex min-w-0 h-[calc(100vh-4rem)] flex-col gap-6 overflow-hidden">
-          <header className="shrink-0 rounded-3xl border border-white/10 bg-brand-surface/70 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl md:p-8">
+        <div className="flex min-w-0 flex-col gap-6 xl:h-[calc(100vh-4rem)] xl:overflow-hidden">
+          <header className="rounded-3xl border border-white/10 bg-brand-surface/70 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl md:p-8 xl:shrink-0">
             <h2 className="text-3xl font-bold tracking-tight">Admin Overview</h2>
             <p className="mt-2 text-sm text-brand-light/70">Monitor registrations and manage screened users from one place.</p>
           </header>
 
-          <section className="shrink-0 grid gap-4 md:grid-cols-3">
+          <section className="grid gap-4 md:grid-cols-3 xl:shrink-0">
             <article className="rounded-2xl border border-brand-cyan/30 bg-brand-surface/70 p-5">
               <p className="text-sm text-brand-light/70">Total Registered</p>
               <p className="mt-2 text-3xl font-bold text-brand-cyan">
@@ -153,8 +153,8 @@ export default function AdminDashboardPage() {
             </article>
           </section>
 
-          <section className="grid flex-1 min-h-0 items-stretch gap-6 xl:grid-cols-2">
-            <article className="flex min-w-0 h-full min-h-0 flex-col overflow-hidden rounded-3xl border border-white/10 bg-brand-surface/70 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+          <section className="grid gap-6 xl:grid-cols-2 xl:flex-1 xl:min-h-0 xl:items-stretch">
+            <article className="flex min-w-0 flex-col rounded-3xl border border-white/10 bg-brand-surface/70 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl xl:h-full xl:min-h-0 xl:overflow-hidden">
               <h3 className="text-xl font-semibold">Recent Registered Users</h3>
               {overviewError ? (
                 <p className="mt-4 rounded-xl border border-brand-pink/40 bg-brand-pink/10 px-3 py-2 text-sm text-brand-pink">
@@ -162,7 +162,7 @@ export default function AdminDashboardPage() {
                 </p>
               ) : null}
 
-              <div className="mt-4 flex-1 min-h-0 space-y-3 overflow-y-scroll pr-2 [scrollbar-gutter:stable] [scrollbar-width:thin] [scrollbar-color:rgba(229,229,229,0.28)_rgba(255,255,255,0.04)] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-[rgba(10,10,10,0.9)] [&::-webkit-scrollbar-thumb]:bg-[linear-gradient(180deg,rgba(0,240,255,0.55),rgba(176,38,255,0.55))] [&::-webkit-scrollbar-thumb:hover]:bg-[linear-gradient(180deg,rgba(0,240,255,0.75),rgba(176,38,255,0.75))]">
+              <div className="mt-4 max-h-[20rem] space-y-3 overflow-y-auto pr-2 sm:max-h-[24rem] xl:flex-1 xl:min-h-0 xl:max-h-none [scrollbar-gutter:stable] [scrollbar-width:thin] [scrollbar-color:rgba(229,229,229,0.28)_rgba(255,255,255,0.04)] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-[rgba(10,10,10,0.9)] [&::-webkit-scrollbar-thumb]:bg-[linear-gradient(180deg,rgba(0,240,255,0.55),rgba(176,38,255,0.55))] [&::-webkit-scrollbar-thumb:hover]:bg-[linear-gradient(180deg,rgba(0,240,255,0.75),rgba(176,38,255,0.75))]">
                 {!isOverviewLoading && (overview?.recentUsers.length ?? 0) === 0 ? (
                   <p className="rounded-xl border border-white/10 bg-brand-dark/50 px-4 py-3 text-sm text-brand-light/70">
                     No registered users yet.
@@ -195,11 +195,11 @@ export default function AdminDashboardPage() {
               </div>
             </article>
 
-            <article className="flex min-w-0 h-full min-h-0 flex-col overflow-hidden rounded-3xl border border-white/10 bg-brand-surface/70 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+            <article className="flex min-w-0 flex-col rounded-3xl border border-white/10 bg-brand-surface/70 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl xl:h-full xl:min-h-0 xl:overflow-hidden">
               <h3 className="text-xl font-semibold">Manual Registration</h3>
               <p className="mt-2 text-sm text-brand-light/70">For approved candidates only.</p>
 
-              <form onSubmit={handleSubmit} className="mt-6 flex flex-1 min-h-0 flex-col">
+              <form onSubmit={handleSubmit} className="mt-6 flex flex-col xl:flex-1 xl:min-h-0">
                 <div className="space-y-5">
                   <div>
                   <label htmlFor="username" className="mb-2 block text-sm font-medium text-brand-light/85">
@@ -274,7 +274,7 @@ export default function AdminDashboardPage() {
                   </div>
                 </div>
 
-                <div className="mt-auto min-h-[4.75rem] pt-4">
+                <div className="mt-4 min-h-[4.75rem] xl:mt-auto xl:pt-4">
                   {notice ? (
                     <p className="rounded-xl border border-brand-cyan/40 bg-brand-cyan/10 px-3 py-2 text-sm text-brand-cyan">
                       {notice}
