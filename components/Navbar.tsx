@@ -40,7 +40,7 @@ export default function Navbar() {
 							Creators
 						</Link>
 						<Link
-							href="#"
+							href="/#about-us"
 							className="text-sm font-medium text-brand-light transition-all duration-300 hover:text-brand-purple hover:drop-shadow-[0_0_8px_rgba(176,38,255,0.8)]"
 						>
 							About Us
@@ -153,7 +153,7 @@ export default function Navbar() {
 						Creators
 					</Link>
 					<Link
-						href="#"
+						href="/#about-us"
 						className="block rounded-xl px-4 py-3 text-base font-semibold text-brand-light transition-all hover:bg-brand-dark hover:text-brand-purple"
 					>
 						About Us
