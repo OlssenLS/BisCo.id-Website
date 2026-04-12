@@ -11,6 +11,20 @@ export type StoredUser = {
   createdAt: string;
 };
 
+export type RecentUser = {
+  username: string;
+  email: string;
+  type: AccountType;
+  createdAt: string;
+};
+
+export type AdminOverview = {
+  totalUsers: number;
+  businessUsers: number;
+  creatorUsers: number;
+  recentUsers: RecentUser[];
+};
+
 type SupabaseUserRow = {
   username: string;
   email: string;
@@ -155,4 +169,44 @@ export async function findUserForLogin(input: {
   };
 
   return user;
+}
+
+export async function getAdminOverview(): Promise<AdminOverview> {
+  const supabaseClient = assertSupabase();
+
+  const [totalRes, businessRes, creatorRes, recentRes] = await Promise.all([
+    supabaseClient.from("app_users").select("id", { count: "exact", head: true }),
+    supabaseClient
+      .from("app_users")
+      .select("id", { count: "exact", head: true })
+      .eq("type", "Business"),
+    supabaseClient
+      .from("app_users")
+      .select("id", { count: "exact", head: true })
+      .eq("type", "Content Creator"),
+    supabaseClient
+      .from("app_users")
+      .select("username, email, type, created_at")
+      .order("created_at", { ascending: false })
+      .limit(8),
+  ]);
+
+  if (totalRes.error) throw totalRes.error;
+  if (businessRes.error) throw businessRes.error;
+  if (creatorRes.error) throw creatorRes.error;
+  if (recentRes.error) throw recentRes.error;
+
+  const recentUsers: RecentUser[] = recentRes.data.map((row) => ({
+    username: row.username,
+    email: row.email,
+    type: row.type,
+    createdAt: row.created_at,
+  }));
+
+  return {
+    totalUsers: totalRes.count ?? 0,
+    businessUsers: businessRes.count ?? 0,
+    creatorUsers: creatorRes.count ?? 0,
+    recentUsers,
+  };
 }

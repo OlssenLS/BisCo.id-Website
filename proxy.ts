@@ -26,7 +26,7 @@ function parseUserSession(value?: string): SessionPayload | null {
   return null;
 }
 
-export function proxy(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname === "/admin") {
