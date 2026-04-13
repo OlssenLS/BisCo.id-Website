@@ -34,7 +34,7 @@ export default function Navbar() {
 
 					<div className="hidden items-center space-x-8 md:flex">
 						<Link
-							href="#"
+							href="/creator"
 							className="text-sm font-medium text-brand-light transition-all duration-300 hover:text-brand-cyan hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.8)]"
 						>
 							Creators
