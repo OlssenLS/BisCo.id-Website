@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Tech Stack
 
-## Getting Started
+- Next.js (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+- Supabase
 
-First, run the development server:
+## Pages and Screenshots
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 1. Hero Section
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![Hero Section](./public/Hero.png)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2. About Us Section
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+![About Us Section](./public/About.png)
 
-## Learn More
+### 3. Contact Section
 
-To learn more about Next.js, take a look at the following resources:
+![Contact Section](./public/Contact.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Admin Login
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+![Admin Login](./public/AdminLogin.png)
 
-## Deploy on Vercel
+### 5. Admin Dashboard
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Admin Dashboard](./public/AdminDashboard.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 6. Business Dashboard
+
+![Business Dashboard](./public/BusinessDashboard.png)
+
+### 7. Creator Dashboard
+
+![Creator Dashboard](./public/CreatorDashboard.png)
+
+### 8. User Login
+
+![User Login](./public/UserLogin.png)
