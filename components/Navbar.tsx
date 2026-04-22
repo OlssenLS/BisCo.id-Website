@@ -28,7 +28,7 @@ export default function Navbar() {
 							</svg>
 						</div>
 						<span className="bg-gradient-to-r from-white to-brand-light bg-clip-text text-xl font-bold tracking-wide text-transparent transition-all duration-300 group-hover:from-brand-cyan group-hover:to-brand-purple">
-							bisco.id
+							BisCo.id
 						</span>
 					</Link>
 

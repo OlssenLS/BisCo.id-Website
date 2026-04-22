@@ -14,7 +14,7 @@ export default function ContactPage() {
             <h1 className="mb-6 text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl">
               Sapa Kami di{" "}
               <span className="bg-gradient-to-r from-brand-cyan to-brand-purple bg-clip-text text-transparent">
-                bisco.id
+                BisCo.id
               </span>
             </h1>
             <p className="text-lg leading-relaxed text-brand-light/70 md:text-xl">
@@ -39,7 +39,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="mb-1 text-xl font-bold text-white">Email Kami</h3>
-                  <p className="mb-2 text-brand-cyan">hello@bisco.id</p>
+                  <p className="mb-2 text-brand-cyan">hello@BisCo.id</p>
                   <p className="text-sm text-brand-light/50">
                     Tim kami selalu siaga membalas semua email masuk dalam 1x24
                     jam.
