@@ -5,6 +5,7 @@ type Company = {
 	glowClass: string;
 };
 
+// Daftar brand yang ditampilkan di belt horizontal.
 const companies: Company[] = [
 	{
 		name: "LocalBite",
@@ -46,6 +47,7 @@ const companies: Company[] = [
 
 function BeltSet({ suffix }: { suffix: string }) {
 	return (
+		// 1 set item logo dirender 2x untuk efek infinite scroll
 		<div className="flex w-max min-w-[100vw] flex-shrink-0 items-center justify-around gap-10 whitespace-nowrap px-4 sm:gap-16 sm:px-8 lg:gap-24">
 			{companies.map((company) => (
 				<div
@@ -71,6 +73,7 @@ function BeltSet({ suffix }: { suffix: string }) {
 export default function CompanyBelt() {
 	return (
 		<section className="relative overflow-hidden border-y border-white/5 bg-brand-surface/30 py-12">
+			{/* Gradient mask kiri-kanan biar transisi logo lebih halus */}
 			<div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-brand-dark to-transparent md:w-48" />
 			<div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-brand-dark to-transparent md:w-48" />
 
@@ -80,6 +83,7 @@ export default function CompanyBelt() {
 				</p>
 			</div>
 
+			{/* 2 set logo identik biar infinite loop */}
 			<div className="group flex w-max animate-infinite-scroll hover:[animation-play-state:paused]">
 				<BeltSet suffix="a" />
 				<BeltSet suffix="b" />

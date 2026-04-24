@@ -1,6 +1,7 @@
 export default function AboutUs() {
   return (
     <section id="about-us" className="relative overflow-hidden scroll-mt-28 px-4 py-24 sm:px-6 lg:px-8">
+      {/* Glow effect */}
       <div className="pointer-events-none absolute top-16 left-[14%] h-56 w-56 rounded-full bg-brand-cyan/10 blur-[120px]" />
       <div className="pointer-events-none absolute right-[12%] bottom-10 h-64 w-64 rounded-full bg-brand-purple/12 blur-[130px]" />
 

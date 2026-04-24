@@ -11,6 +11,7 @@ export default function Navbar() {
 
 	return (
 		<>
+			{/* Fixed top navigation bar */}
 			<nav className="fixed top-0 z-50 w-full border-b border-white/10 bg-brand-dark/80 backdrop-blur-lg transition-all duration-300">
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 				<div className="flex h-20 items-center justify-between">
@@ -33,6 +34,7 @@ export default function Navbar() {
 						</span>
 					</Link>
 
+					{/* Desktop navigation */}
 					<div className="hidden items-center space-x-8 md:flex">
 						<Link
 							href={creatorsHref}
@@ -47,6 +49,7 @@ export default function Navbar() {
 							About Us
 						</Link>
 
+						{/* dropdown buat responsive */}
 						<div className="group relative">
 							<button className="group flex items-center gap-1 py-2 text-sm font-medium text-brand-light transition-colors duration-300 group-hover:text-brand-pink">
 								Apply
@@ -121,6 +124,7 @@ export default function Navbar() {
 						</Link>
 					</div>
 
+					{/* Hamburger toggle buat mobile */}
 					<div className="flex items-center md:hidden">
 						<button
 							aria-label="Toggle mobile menu"
@@ -141,6 +145,7 @@ export default function Navbar() {
 				</div>
 			</div>
 
+			{/* Mobile dropdown menu */}
 			<div
 				className={`absolute top-20 left-0 w-full border-b border-white/10 bg-brand-surface/95 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.8)] md:hidden ${
 					isMenuOpen ? "block animate-[fadeIn_0.2s_ease-out]" : "hidden"
@@ -214,6 +219,7 @@ export default function Navbar() {
 			</div>
 			</nav>
 
+			{/* Popup registrasi reusable yang dipakai dari menu Apply */}
 			<RegistrationPopup
 				target={registrationTarget}
 				onClose={() => setRegistrationTarget(null)}

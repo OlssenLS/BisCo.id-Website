@@ -50,6 +50,11 @@ function normalizeIdentity(value: string) {
   return value.trim().toLowerCase();
 }
 
+function isUniqueViolation(error: { code?: string; message?: string } | null) {
+  if (!error) return false;
+  return error.code === "23505" || /duplicate key value/i.test(error.message ?? "");
+}
+
 function assertSupabase() {
   if (!supabase) {
     throw new Error(
@@ -74,20 +79,6 @@ export async function addUser(input: {
   const normalizedUsername = normalizeIdentity(input.username);
   const normalizedEmail = normalizeIdentity(input.email);
 
-  const duplicateCheck = await supabaseClient
-    .from("app_users")
-    .select("username, email")
-    .or(`username.eq.${normalizedUsername},email.eq.${normalizedEmail}`)
-    .limit(1);
-
-  if (duplicateCheck.error) {
-    throw duplicateCheck.error;
-  }
-
-  if (duplicateCheck.data.length > 0) {
-    return { ok: false as const, error: "Username or email already exists." };
-  }
-
   const rowToInsert: SupabaseUserRow = {
     username: normalizedUsername,
     email: normalizedEmail,
@@ -103,6 +94,9 @@ export async function addUser(input: {
     .single();
 
   if (insertResult.error) {
+    if (isUniqueViolation(insertResult.error)) {
+      return { ok: false as const, error: "Username or email already exists." };
+    }
     throw insertResult.error;
   }
 
@@ -126,35 +120,26 @@ export async function findUserForLogin(input: {
   const normalizedIdentity = normalizeIdentity(input.identity);
   const passwordHash = hashPassword(input.password);
 
-  const byUsernameResult = await supabaseClient
+  const userResult = await supabaseClient
     .from("app_users")
     .select("username, email, type, password_hash, created_at")
-    .eq("username", normalizedIdentity)
+    .or(`username.eq.${normalizedIdentity},email.eq.${normalizedIdentity}`)
     .eq("type", input.type)
-    .maybeSingle();
+    .limit(2);
 
-  if (byUsernameResult.error) {
-    throw byUsernameResult.error;
+  if (userResult.error) {
+    throw userResult.error;
   }
 
-  const byEmailResult = byUsernameResult.data
-    ? { data: null, error: null }
-    : await supabaseClient
-        .from("app_users")
-        .select("username, email, type, password_hash, created_at")
-        .eq("email", normalizedIdentity)
-        .eq("type", input.type)
-        .maybeSingle();
+  const candidates = userResult.data ?? [];
 
-  if (byEmailResult.error) {
-    throw byEmailResult.error;
-  }
-
-  const row = byUsernameResult.data ?? byEmailResult.data;
-
-  if (!row) {
+  if (candidates.length === 0) {
     return null;
   }
+
+  const usernameMatch = candidates.find((candidate) => candidate.username === normalizedIdentity);
+  const emailMatch = candidates.find((candidate) => candidate.email === normalizedIdentity);
+  const row = usernameMatch ?? emailMatch ?? candidates[0];
 
   if (row.password_hash !== passwordHash) {
     return null;
@@ -174,8 +159,7 @@ export async function findUserForLogin(input: {
 export async function getAdminOverview(): Promise<AdminOverview> {
   const supabaseClient = assertSupabase();
 
-  const [totalRes, businessRes, creatorRes, recentRes] = await Promise.all([
-    supabaseClient.from("app_users").select("id", { count: "exact", head: true }),
+  const [businessRes, creatorRes, recentRes] = await Promise.all([
     supabaseClient
       .from("app_users")
       .select("id", { count: "exact", head: true })
@@ -186,12 +170,11 @@ export async function getAdminOverview(): Promise<AdminOverview> {
       .eq("type", "Content Creator"),
     supabaseClient
       .from("app_users")
-      .select("username, email, type, created_at")
+      .select("username, email, type, created_at", { count: "exact" })
       .order("created_at", { ascending: false })
       .limit(8),
   ]);
 
-  if (totalRes.error) throw totalRes.error;
   if (businessRes.error) throw businessRes.error;
   if (creatorRes.error) throw creatorRes.error;
   if (recentRes.error) throw recentRes.error;
@@ -204,7 +187,7 @@ export async function getAdminOverview(): Promise<AdminOverview> {
   }));
 
   return {
-    totalUsers: totalRes.count ?? 0,
+    totalUsers: recentRes.count ?? 0,
     businessUsers: businessRes.count ?? 0,
     creatorUsers: creatorRes.count ?? 0,
     recentUsers,

@@ -9,6 +9,7 @@ export default function Hero() {
 	return (
 		<>
 			<section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden">
+				{/* Glow effect */}
 				<div className="absolute top-1/4 left-1/4 h-72 w-72 animate-pulse rounded-full bg-brand-cyan/20 opacity-70 mix-blend-screen blur-[80px] sm:blur-[120px]" />
 				<div
 					className="absolute right-1/4 bottom-1/4 h-80 w-80 animate-pulse rounded-full bg-brand-purple/20 opacity-70 mix-blend-screen blur-[80px] sm:blur-[120px]"
@@ -16,6 +17,7 @@ export default function Hero() {
 				/>
 				<div className="absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-pink/10 opacity-50 mix-blend-screen blur-[95px] sm:blur-[150px]" />
 
+				{/* badge */}
 				<div className="relative z-10 mx-auto max-w-5xl px-4 pt-20 pb-16 text-center sm:px-6 lg:px-8">
 					<div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 shadow-[0_4px_20px_rgba(0,240,255,0.1)] backdrop-blur-md">
 						<span className="h-2 w-2 animate-ping rounded-full bg-brand-cyan shadow-[0_0_10px_#00f0ff]" />
@@ -101,6 +103,7 @@ export default function Hero() {
 				</div>
 			</section>
 
+			{/* Popup registrasi reusable buat CTA hero */}
 			<RegistrationPopup
 				target={registrationTarget}
 				onClose={() => setRegistrationTarget(null)}

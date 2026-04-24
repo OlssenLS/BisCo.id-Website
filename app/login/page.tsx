@@ -54,9 +54,11 @@ export default function UserLoginPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-brand-dark text-brand-light">
+      {/* Background glow */}
       <div className="pointer-events-none absolute -top-12 left-1/3 h-72 w-72 rounded-full bg-brand-cyan/15 blur-[130px]" />
       <div className="pointer-events-none absolute -right-10 bottom-0 h-96 w-96 rounded-full bg-brand-purple/15 blur-[150px]" />
 
+      {/* Back button */}
       <Link
         href="/"
         className="absolute top-5 left-4 z-20 inline-flex items-center gap-2 rounded-full border border-white/12 bg-brand-surface/70 px-4 py-2 text-sm font-semibold text-brand-light/90 backdrop-blur-xl transition-all hover:border-brand-cyan/50 hover:text-brand-cyan sm:top-6 sm:left-6"
@@ -65,7 +67,9 @@ export default function UserLoginPage() {
         Back to Home
       </Link>
 
+      {/* Split layout */}
       <section className="relative grid min-h-screen w-full overflow-hidden border-y border-white/10 bg-brand-surface/55 backdrop-blur-xl lg:grid-cols-2 lg:border-y-0">
+        {/* Left panel */}
         <aside className="relative overflow-hidden border-b border-white/10 p-8 sm:p-10 lg:border-r lg:border-b-0 lg:p-14 xl:p-16 lg:py-20 xl:py-20">
           <div className="pointer-events-none absolute -top-16 -left-16 h-52 w-52 rounded-full bg-brand-cyan/18 blur-[90px]" />
           <div className="pointer-events-none absolute right-2 bottom-0 h-52 w-52 rounded-full bg-brand-purple/18 blur-[90px]" />
@@ -97,6 +101,7 @@ export default function UserLoginPage() {
           </div>
         </aside>
 
+        {/* Right panel - login form */}
         <div className="p-8 sm:p-10 lg:p-14 xl:p-16 lg:py-20 xl:py-20">
           <div className="mb-8">
             <h2 className="text-3xl font-bold tracking-tight">Login</h2>
