@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { cookies } from "next/headers";
 
 const supabaseUrl = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -14,14 +15,35 @@ const supabase =
       })
     : null;
 
+async function getUserFromSession() {
+  const cookieStore = cookies();
+  const sessionCookie = (await cookieStore).get("user_session");
+  if (!sessionCookie) return null;
+
+  try {
+    const payload = JSON.parse(
+      Buffer.from(sessionCookie.value, "base64url").toString("utf-8")
+    );
+    return payload.username as string;
+  } catch {
+    return null;
+  }
+}
+
 export async function GET() {
   if (!supabase) {
     return NextResponse.json({ error: "Supabase not configured" }, { status: 500 });
   }
 
+  const username = await getUserFromSession();
+  if (!username) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { data, error } = await supabase
     .from("campaigns")
     .select("*")
+    .eq("username", username)
     .order("created_at", { ascending: false })
     .limit(1)
     .single();
@@ -41,6 +63,11 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Supabase not configured" }, { status: 500 });
   }
 
+  const username = await getUserFromSession();
+  if (!username) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const body = await request.json();
   const { name, content_type, description } = body;
 
@@ -51,6 +78,7 @@ export async function POST(request: NextRequest) {
   const { data, error } = await supabase
     .from("campaigns")
     .insert({
+      username,
       name,
       content_type,
       description,
@@ -72,6 +100,11 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({ error: "Supabase not configured" }, { status: 500 });
   }
 
+  const username = await getUserFromSession();
+  if (!username) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const body = await request.json();
   const { id, name, content_type, description } = body;
 
@@ -88,6 +121,7 @@ export async function PATCH(request: NextRequest) {
     .from("campaigns")
     .update(updateData)
     .eq("id", id)
+    .eq("username", username)
     .select()
     .single();
 

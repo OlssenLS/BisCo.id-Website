@@ -33,24 +33,24 @@ export function EditableCampaign() {
         setEditDescription(data.description);
       } else {
         setCampaign({
-          name: "Ramadan Awareness Boost",
-          content_type: "TikTok UGC + Instagram Reels",
-          description: "Looking for authentic short-form storytelling to highlight product benefit and drive local brand recall.",
+          name: "This is your campaign. Click the edit button to customize it.",
+          content_type: "Video content (e.g. TikTok UGC, Instagram Reels, YouTube Shorts)",
+          description: "Basically a description of your campaign.",
         });
-        setEditName("Ramadan Awareness Boost");
-        setEditContentType("TikTok UGC + Instagram Reels");
-        setEditDescription("Looking for authentic short-form storytelling to highlight product benefit and drive local brand recall.");
+        setEditName("This is your campaign. Click the edit button to customize it.");
+        setEditContentType("Video content (e.g. TikTok UGC, Instagram Reels, YouTube Shorts)");
+        setEditDescription("Basically a description of your campaign.");
       }
     } catch (error) {
       console.error("Failed to fetch campaign:", error);
       setCampaign({
-        name: "Ramadan Awareness Boost",
-        content_type: "TikTok UGC + Instagram Reels",
-        description: "Looking for authentic short-form storytelling to highlight product benefit and drive local brand recall.",
+        name: "This is your campaign. Click the edit button to customize it.",
+        content_type: "Video content (e.g. TikTok UGC, Instagram Reels, YouTube Shorts)",
+        description: "Basically a description of your campaign.",
       });
-      setEditName("Ramadan Awareness Boost");
-      setEditContentType("TikTok UGC + Instagram Reels");
-      setEditDescription("Looking for authentic short-form storytelling to highlight product benefit and drive local brand recall.");
+      setEditName("This is your campaign. Click the edit button to customize it.");
+      setEditContentType("Video content (e.g. TikTok UGC, Instagram Reels, YouTube Shorts)");
+      setEditDescription("Basically a description of your campaign.");
     } finally {
       setIsLoading(false);
     }
