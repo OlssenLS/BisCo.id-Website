@@ -1,6 +1,8 @@
 import { cookies } from "next/headers";
 import { LogoutButton } from "./logout-button";
 import { CommissionQueue } from "./commission-queue";
+import { Inbox } from "./inbox";
+import { StatsCards } from "./stats-cards";
 
 type SessionPayload = {
   username: string;
@@ -52,66 +54,29 @@ export default async function CreatorDashboardPage() {
               <h1 className="mt-2 text-3xl font-bold md:text-4xl">Commission Dashboard</h1>
               <p className="mt-2 text-brand-light/70">Track active campaigns, deliverables, and your pending payouts in one place.</p>
             </div>
-            {session && (
-              <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-brand-dark/50 p-4 backdrop-blur-sm">
-                <BlankProfile />
-                <div>
-                  <p className="text-sm text-brand-light/50">Logged in as</p>
-                  <p className="font-semibold text-brand-cyan">{session.username}</p>
-                  <p className="text-sm text-brand-light/60">Reviewer • 15.218 followers</p>
+            <div className="flex items-center gap-4">
+              <Inbox />
+              {session && (
+                <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-brand-dark/50 p-4 backdrop-blur-sm">
+                  <BlankProfile />
+                  <div>
+                    <p className="text-sm text-brand-light/50">Logged in as</p>
+                    <p className="font-semibold text-brand-cyan">{session.username}</p>
+                    <p className="text-sm text-brand-light/60">Reviewer • 15.218 followers</p>
+                  </div>
+                  <LogoutButton />
                 </div>
-                <LogoutButton />
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </header>
 
-        <div className="grid gap-4 md:grid-cols-3">
-          <article className="rounded-2xl border border-brand-cyan/30 bg-brand-surface/70 p-5">
-            <p className="text-sm text-brand-light/70">Active Commissions</p>
-            <p className="mt-2 text-3xl font-bold text-brand-cyan">4</p>
-          </article>
-          <article className="rounded-2xl border border-brand-purple/30 bg-brand-surface/70 p-5">
-            <p className="text-sm text-brand-light/70">Awaiting Approval</p>
-            <p className="mt-2 text-3xl font-bold text-brand-purple">2</p>
-          </article>
-          <article className="rounded-2xl border border-green-500 bg-brand-surface/70 p-5">
-            <p className="text-sm text-brand-light/70">Pending Payout</p>
-            <p className="mt-2 text-3xl font-bold text-green-500">Rp 3.250.000</p>
-          </article>
-        </div>
+        <StatsCards />
 
         <section className="rounded-2xl border border-white/10 bg-brand-surface/80 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
           <h2 className="text-xl font-semibold">Current Commission Queue</h2>
           <div className="mt-4">
-            <CommissionQueue
-              items={[
-                {
-                  id: "1",
-                  brand: "LocalBite",
-                  task: "1x TikTok Review + 1x Story",
-                  due: "Due in 2 days",
-                  status: "In Progress",
-                  progress: 65,
-                },
-                {
-                  id: "2",
-                  brand: "KopiKenangan",
-                  task: "UGC Product Reel",
-                  due: "Due in 4 days",
-                  status: "Script Review",
-                  progress: 30,
-                },
-                {
-                  id: "3",
-                  brand: "Majoo",
-                  task: "YouTube Shorts Mention",
-                  due: "Due in 6 days",
-                  status: "Ready to Submit",
-                  progress: 90,
-                },
-              ]}
-            />
+            <CommissionQueue />
           </div>
         </section>
       </section>

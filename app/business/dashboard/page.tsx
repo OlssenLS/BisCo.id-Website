@@ -1,4 +1,5 @@
 import { EditableCampaign } from "./editable-campaign";
+import { BusinessCommissions } from "./business-commissions";
 
 export default function BusinessDashboardPage() {
   return (
@@ -29,6 +30,13 @@ export default function BusinessDashboardPage() {
               <p className="text-lg font-semibold text-white">Creator Matches Ready</p>
               <p className="mt-2 text-brand-light/70">12 candidates filtered by niche, city, audience quality, and expected ROI.</p>
             </article>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-[136px_1fr] md:items-start md:gap-7">
+            <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full border border-green-500/40 bg-brand-dark/70 text-sm font-semibold text-green-500 shadow-[0_0_26px_rgba(34,197,94,0.22)] md:mx-0 md:h-34 md:w-34">
+              Progress
+            </div>
+            <BusinessCommissions />
           </div>
         </div>
 

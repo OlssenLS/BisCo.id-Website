@@ -7,16 +7,30 @@ type Campaign = {
   name: string;
   content_type: string;
   description: string;
+  price: number;
 } | null;
+
+const CONTENT_TYPES = [
+  "TikTok UGC",
+  "Instagram Reels",
+  "YouTube Shorts",
+  "TikTok + Instagram",
+  "Instagram Story",
+  "YouTube Long-form",
+  "TikTok Review",
+  "UGC Product Reel",
+] as const;
 
 export function EditableCampaign() {
   const [campaign, setCampaign] = useState<Campaign>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [isSending, setIsSending] = useState(false);
   const [editName, setEditName] = useState("");
   const [editContentType, setEditContentType] = useState("");
   const [editDescription, setEditDescription] = useState("");
+  const [editPrice, setEditPrice] = useState(0);
 
   useEffect(() => {
     fetchCampaign();
@@ -31,26 +45,31 @@ export function EditableCampaign() {
         setEditName(data.name);
         setEditContentType(data.content_type);
         setEditDescription(data.description);
+        setEditPrice(data.price || 0);
       } else {
         setCampaign({
           name: "This is your campaign. Click the edit button to customize it.",
-          content_type: "Video content (e.g. TikTok UGC, Instagram Reels, YouTube Shorts)",
+          content_type: "TikTok UGC",
           description: "Basically a description of your campaign.",
+          price: 0,
         });
         setEditName("This is your campaign. Click the edit button to customize it.");
-        setEditContentType("Video content (e.g. TikTok UGC, Instagram Reels, YouTube Shorts)");
+        setEditContentType("TikTok UGC");
         setEditDescription("Basically a description of your campaign.");
+        setEditPrice(0);
       }
     } catch (error) {
       console.error("Failed to fetch campaign:", error);
       setCampaign({
         name: "This is your campaign. Click the edit button to customize it.",
-        content_type: "Video content (e.g. TikTok UGC, Instagram Reels, YouTube Shorts)",
+        content_type: "TikTok UGC",
         description: "Basically a description of your campaign.",
+        price: 0,
       });
       setEditName("This is your campaign. Click the edit button to customize it.");
-      setEditContentType("Video content (e.g. TikTok UGC, Instagram Reels, YouTube Shorts)");
+      setEditContentType("TikTok UGC");
       setEditDescription("Basically a description of your campaign.");
+      setEditPrice(0);
     } finally {
       setIsLoading(false);
     }
@@ -63,6 +82,7 @@ export function EditableCampaign() {
         name: editName,
         content_type: editContentType,
         description: editDescription,
+        price: editPrice,
       };
 
       let response;
@@ -95,8 +115,40 @@ export function EditableCampaign() {
       setEditName(campaign.name);
       setEditContentType(campaign.content_type);
       setEditDescription(campaign.description);
+      setEditPrice(campaign.price);
     }
     setIsEditing(false);
+  };
+
+  const handleSendCampaign = async () => {
+    if (!campaign) return;
+
+    setIsSending(true);
+    try {
+      const response = await fetch("/api/campaigns/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          campaign_id: campaign.id,
+          name: campaign.name,
+          content_type: campaign.content_type,
+          description: campaign.description,
+          price: campaign.price,
+        }),
+      });
+
+      if (response.ok) {
+        alert("Campaign sent to creators!");
+      } else {
+        const data = await response.json();
+        alert(data.error || "Failed to send campaign");
+      }
+    } catch (error) {
+      console.error("Failed to send campaign:", error);
+      alert("Failed to send campaign");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   if (isLoading) {
@@ -126,12 +178,18 @@ export function EditableCampaign() {
           </div>
           <div>
             <label className="mb-1 block text-sm font-medium text-brand-light/70">Type of content</label>
-            <input
-              type="text"
+            <select
               value={editContentType}
               onChange={(e) => setEditContentType(e.target.value)}
               className="w-full rounded-lg border border-white/20 bg-brand-dark/50 px-3 py-2 text-white focus:border-brand-cyan focus:outline-none"
-            />
+            >
+              <option value="">Select content type</option>
+              {CONTENT_TYPES.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label className="mb-1 block text-sm font-medium text-brand-light/70">Description</label>
@@ -140,6 +198,17 @@ export function EditableCampaign() {
               onChange={(e) => setEditDescription(e.target.value)}
               rows={3}
               className="w-full rounded-lg border border-white/20 bg-brand-dark/50 px-3 py-2 text-white focus:border-brand-cyan focus:outline-none resize-none"
+            />
+          </div>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-brand-light/70">Price (Rp)</label>
+            <input
+              type="number"
+              value={editPrice}
+              onChange={(e) => setEditPrice(Number(e.target.value))}
+              min="0"
+              step="1000"
+              className="w-full rounded-lg border border-white/20 bg-brand-dark/50 px-3 py-2 text-white focus:border-brand-cyan focus:outline-none"
             />
           </div>
           <div className="flex gap-2">
@@ -168,28 +237,53 @@ export function EditableCampaign() {
               <p className="text-lg font-semibold text-white">Name: {campaign?.name}</p>
               <p className="mt-2 text-brand-light/75">Type of content: {campaign?.content_type}</p>
               <p className="mt-2 text-brand-light/65">Description: {campaign?.description}</p>
+              <p className="mt-2 text-brand-light/65">Price: Rp {campaign?.price?.toLocaleString("id-ID") || 0}</p>
             </div>
-            <button
-              type="button"
-              onClick={() => setIsEditing(true)}
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/20 bg-white/5 text-brand-light/70 transition-colors hover:bg-white/10 hover:text-brand-light"
-              aria-label="Edit campaign"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={handleSendCampaign}
+                disabled={isSending || !campaign?.id}
+                className="flex h-8 w-8 items-center justify-center rounded-lg border border-brand-cyan/30 bg-brand-cyan/10 text-brand-cyan transition-colors hover:bg-brand-cyan/20 disabled:opacity-50"
+                aria-label="Send campaign"
               >
-                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-                <path d="m15 5 4 4" />
-              </svg>
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m22 2-7 20-4-9-9-4Z" />
+                  <path d="M22 2 11 13" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsEditing(true)}
+                className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/20 bg-white/5 text-brand-light/70 transition-colors hover:bg-white/10 hover:text-brand-light"
+                aria-label="Edit campaign"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                  <path d="m15 5 4 4" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       )}

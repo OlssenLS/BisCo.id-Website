@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { name, content_type, description } = body;
+  const { name, content_type, description, price } = body;
 
   if (!name || !content_type || !description) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -82,6 +82,7 @@ export async function POST(request: NextRequest) {
       name,
       content_type,
       description,
+      price: price || 0,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     })
@@ -106,16 +107,17 @@ export async function PATCH(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { id, name, content_type, description } = body;
+  const { id, name, content_type, description, price } = body;
 
   if (!id) {
     return NextResponse.json({ error: "Missing campaign id" }, { status: 400 });
   }
 
-  const updateData: Record<string, string> = { updated_at: new Date().toISOString() };
+  const updateData: Record<string, string | number> = { updated_at: new Date().toISOString() };
   if (name !== undefined) updateData.name = name;
   if (content_type !== undefined) updateData.content_type = content_type;
   if (description !== undefined) updateData.description = description;
+  if (price !== undefined) updateData.price = price;
 
   const { data, error } = await supabase
     .from("campaigns")
