@@ -8,8 +8,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Website UMKM",
-  description: "Website UMKM dengan Next.js dan Tailwind CSS",
+  title: "BisCo.id",
+  description: "Personalized business and content creator management platform",
 };
 
 export default function RootLayout({
