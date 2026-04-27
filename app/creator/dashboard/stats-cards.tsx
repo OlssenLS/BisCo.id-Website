@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 
 type Stats = {
   activeCommissions: number;
-  awaitingApproval: number;
   completedCommissions: number;
   pendingPayout: number;
 };
@@ -12,7 +11,6 @@ type Stats = {
 export function StatsCards() {
   const [stats, setStats] = useState<Stats>({
     activeCommissions: 0,
-    awaitingApproval: 0,
     completedCommissions: 0,
     pendingPayout: 0,
   });
@@ -35,17 +33,11 @@ export function StatsCards() {
   }, []);
 
   return (
-    <div className="grid gap-4 md:grid-cols-4">
+    <div className="grid gap-4 md:grid-cols-3">
       <article className="rounded-2xl border border-brand-cyan/30 bg-brand-surface/70 p-5">
         <p className="text-sm text-brand-light/70">Active Commissions</p>
         <p className="mt-2 text-3xl font-bold text-brand-cyan">
           {isLoading ? "..." : stats.activeCommissions}
-        </p>
-      </article>
-      <article className="rounded-2xl border border-brand-purple/30 bg-brand-surface/70 p-5">
-        <p className="text-sm text-brand-light/70">Awaiting Approval</p>
-        <p className="mt-2 text-3xl font-bold text-brand-purple">
-          {isLoading ? "..." : stats.awaitingApproval}
         </p>
       </article>
       <article className="rounded-2xl border border-green-500/30 bg-brand-surface/70 p-5">

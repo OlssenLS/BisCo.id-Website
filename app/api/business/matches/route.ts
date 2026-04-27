@@ -35,36 +35,25 @@ export async function GET() {
     return NextResponse.json({ error: "Supabase not configured" }, { status: 500 });
   }
 
-  const creatorUsername = await getUserFromSession();
-  if (!creatorUsername) {
+  const businessUsername = await getUserFromSession();
+  if (!businessUsername) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { data: commissions, error } = await supabase
+  // Count unique creators who accepted campaigns from this business
+  const { data, error } = await supabase
     .from("commissions")
-    .select("*")
-    .eq("creator_username", creatorUsername);
+    .select("creator_username")
+    .eq("business_username", businessUsername);
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  const activeCommissions = commissions?.filter(
-    (c) => c.status !== "Completed" && c.status !== "Approved"
-  ).length ?? 0;
-
-  const completedCommissions = commissions?.filter(
-    (c) => c.status === "Completed"
-  ).length ?? 0;
-
-  // Calculate pending payout from completed commissions
-  const pendingPayout = commissions
-    ?.filter((c) => c.status === "Completed")
-    .reduce((sum, c) => sum + (c.price || 0), 0) ?? 0;
+  // Count unique creators
+  const uniqueCreators = new Set(data?.map((c) => c.creator_username) ?? []);
 
   return NextResponse.json({
-    activeCommissions,
-    completedCommissions,
-    pendingPayout,
+    count: uniqueCreators.size,
   });
 }

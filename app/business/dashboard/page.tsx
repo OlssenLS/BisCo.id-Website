@@ -1,5 +1,7 @@
 import { EditableCampaign } from "./editable-campaign";
 import { BusinessCommissions } from "./business-commissions";
+import { CreatorMatches } from "./creator-matches";
+import { CampaignButton } from "./campaign-button";
 
 export default function BusinessDashboardPage() {
   return (
@@ -16,9 +18,7 @@ export default function BusinessDashboardPage() {
 
         <div className="mt-10 space-y-8 md:mt-12">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-[136px_1fr] md:items-center md:gap-7">
-            <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full border border-brand-cyan/40 bg-brand-dark/70 text-sm font-semibold text-brand-cyan shadow-[0_0_26px_rgba(0,240,255,0.22)] md:mx-0 md:h-34 md:w-34">
-              Campaign
-            </div>
+            <CampaignButton />
             <EditableCampaign />
           </div>
 
@@ -26,10 +26,7 @@ export default function BusinessDashboardPage() {
             <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full border border-brand-purple/40 bg-brand-dark/70 text-sm font-semibold text-brand-purple shadow-[0_0_26px_rgba(176,38,255,0.22)] md:mx-0 md:h-34 md:w-34">
               Match
             </div>
-            <article className="rounded-2xl border border-white/10 bg-brand-dark/65 p-5 shadow-[0_12px_40px_rgba(0,0,0,0.35)]">
-              <p className="text-lg font-semibold text-white">Creator Matches Ready</p>
-              <p className="mt-2 text-brand-light/70">12 candidates filtered by niche, city, audience quality, and expected ROI.</p>
-            </article>
+            <CreatorMatches />
           </div>
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-[136px_1fr] md:items-start md:gap-7">
@@ -38,15 +35,6 @@ export default function BusinessDashboardPage() {
             </div>
             <BusinessCommissions />
           </div>
-        </div>
-
-        <div className="mt-10 flex justify-center md:mt-14">
-          <button
-            type="button"
-            className="w-full max-w-md rounded-2xl bg-gradient-to-r from-brand-cyan to-brand-purple px-6 py-4 text-lg font-bold text-brand-dark shadow-[0_12px_35px_rgba(0,240,255,0.28)] transition-all duration-300 hover:brightness-110 active:scale-[0.99]"
-          >
-            Promote my business now
-          </button>
         </div>
       </section>
     </main>

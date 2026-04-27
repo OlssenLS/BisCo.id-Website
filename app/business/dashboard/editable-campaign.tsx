@@ -26,7 +26,6 @@ export function EditableCampaign() {
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
-  const [isSending, setIsSending] = useState(false);
   const [editName, setEditName] = useState("");
   const [editContentType, setEditContentType] = useState("");
   const [editDescription, setEditDescription] = useState("");
@@ -120,37 +119,6 @@ export function EditableCampaign() {
     setIsEditing(false);
   };
 
-  const handleSendCampaign = async () => {
-    if (!campaign) return;
-
-    setIsSending(true);
-    try {
-      const response = await fetch("/api/campaigns/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          campaign_id: campaign.id,
-          name: campaign.name,
-          content_type: campaign.content_type,
-          description: campaign.description,
-          price: campaign.price,
-        }),
-      });
-
-      if (response.ok) {
-        alert("Campaign sent to creators!");
-      } else {
-        const data = await response.json();
-        alert(data.error || "Failed to send campaign");
-      }
-    } catch (error) {
-      console.error("Failed to send campaign:", error);
-      alert("Failed to send campaign");
-    } finally {
-      setIsSending(false);
-    }
-  };
-
   if (isLoading) {
     return (
       <article className="rounded-2xl border border-white/10 bg-brand-dark/65 p-5 shadow-[0_12px_40px_rgba(0,0,0,0.35)]">
@@ -240,28 +208,6 @@ export function EditableCampaign() {
               <p className="mt-2 text-brand-light/65">Price: Rp {campaign?.price?.toLocaleString("id-ID") || 0}</p>
             </div>
             <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={handleSendCampaign}
-                disabled={isSending || !campaign?.id}
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-brand-cyan/30 bg-brand-cyan/10 text-brand-cyan transition-colors hover:bg-brand-cyan/20 disabled:opacity-50"
-                aria-label="Send campaign"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m22 2-7 20-4-9-9-4Z" />
-                  <path d="M22 2 11 13" />
-                </svg>
-              </button>
               <button
                 type="button"
                 onClick={() => setIsEditing(true)}

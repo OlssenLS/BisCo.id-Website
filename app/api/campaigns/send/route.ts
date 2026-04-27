@@ -40,11 +40,21 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body = await request.json();
-  const { campaign_id, name, content_type, description, price } = body;
+  // Get the business's campaign
+  const { data: campaign, error: campaignError } = await supabase
+    .from("campaigns")
+    .select("*")
+    .eq("username", businessUsername)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
 
-  if (!campaign_id || !name || !content_type || !description) {
-    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+  if (campaignError) {
+    return NextResponse.json({ error: campaignError.message }, { status: 500 });
+  }
+
+  if (!campaign) {
+    return NextResponse.json({ error: "No campaign found. Please create a campaign first." }, { status: 404 });
   }
 
   // Get all content creators
@@ -65,11 +75,11 @@ export async function POST(request: NextRequest) {
   const invitations = creators.map((creator) => ({
     business_username: businessUsername,
     creator_username: creator.username,
-    campaign_id,
-    name,
-    content_type,
-    description,
-    price: price || 0,
+    campaign_id: campaign.id,
+    name: campaign.name,
+    content_type: campaign.content_type,
+    description: campaign.description,
+    price: campaign.price || 0,
     status: "pending",
     created_at: new Date().toISOString(),
   }));
