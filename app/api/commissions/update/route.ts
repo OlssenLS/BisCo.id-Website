@@ -53,6 +53,23 @@ export async function PATCH(request: NextRequest) {
   if (progress !== undefined) updateData.progress = progress;
   if (status !== undefined) updateData.status = status;
 
+  // First check if commission exists
+  const { data: existingCommission, error: fetchError } = await supabase
+    .from("commissions")
+    .select("*")
+    .eq("id", id)
+    .eq("creator_username", creatorUsername)
+    .maybeSingle();
+
+  if (fetchError) {
+    return NextResponse.json({ error: fetchError.message }, { status: 500 });
+  }
+
+  if (!existingCommission) {
+    return NextResponse.json({ error: "Commission not found" }, { status: 404 });
+  }
+
+  // Update the commission
   const { data, error } = await supabase
     .from("commissions")
     .update(updateData)

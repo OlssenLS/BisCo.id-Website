@@ -194,6 +194,7 @@ export function CommissionQueue({ items: initialItems }: CommissionQueueProps) {
       });
 
       if (response.ok) {
+        const data = await response.json();
         setItems((prev) =>
           prev.map((item) =>
             item.id === id ? { ...item, progress, status } : item
@@ -201,6 +202,7 @@ export function CommissionQueue({ items: initialItems }: CommissionQueueProps) {
         );
       } else {
         const data = await response.json();
+        console.error("Update failed:", data);
         alert(data.error || "Failed to update progress");
       }
     } catch (error) {
