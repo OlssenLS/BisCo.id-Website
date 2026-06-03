@@ -33,7 +33,7 @@ export function CampaignButton() {
       type="button"
       onClick={handleSendCampaign}
       disabled={isSending}
-      className="mx-auto flex h-28 w-28 flex-col items-center justify-center gap-1 rounded-full border border-brand-cyan/40 bg-brand-dark/70 text-sm font-semibold text-brand-cyan shadow-[0_0_26px_rgba(0,240,255,0.22)] transition-all hover:scale-105 hover:border-brand-cyan/60 hover:shadow-[0_0_35px_rgba(0,240,255,0.35)] disabled:opacity-50 disabled:hover:scale-100 md:mx-0 md:h-34 md:w-34 md:text-base"
+      className="mx-auto flex h-28 w-28 flex-col items-center justify-center gap-1 rounded-full border border-brand-cyan/40 bg-brand-dark/70 text-sm font-semibold text-brand-cyan shadow-[0_0_26px_rgba(0,196,110,0.22)] transition-all hover:scale-105 hover:border-brand-cyan/60 hover:shadow-[0_0_35px_rgba(0,196,110,0.35)] disabled:opacity-50 disabled:hover:scale-100 md:mx-0 md:h-34 md:w-34 md:text-base"
     >
       {isSending ? (
         <>

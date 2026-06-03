@@ -16,8 +16,8 @@ export default function Hero() {
 
 				{/* badge */}
 				<div className="relative z-10 mx-auto max-w-5xl px-4 pt-20 pb-16 text-center sm:px-6 lg:px-8">
-					<div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 shadow-[0_4px_20px_rgba(0,240,255,0.1)] backdrop-blur-md">
-						<span className="h-2 w-2 animate-ping rounded-full bg-brand-cyan shadow-[0_0_10px_#00f0ff]" />
+					<div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 shadow-[0_4px_20px_rgba(0,196,110,0.1)] backdrop-blur-md">
+						<span className="h-2 w-2 animate-ping rounded-full bg-brand-cyan shadow-[0_0_10px_#00c46e]" />
 						<span className="absolute h-2 w-2 rounded-full bg-brand-cyan" />
 						<span className="text-xs font-semibold tracking-wider text-brand-light uppercase sm:text-sm">
 							Platform Kolaborasi #1
@@ -26,7 +26,7 @@ export default function Hero() {
 
 					<h1 className="mb-6 text-4xl leading-tight font-extrabold tracking-tight sm:text-6xl md:text-7xl">
 						Hubungkan{" "}
-						<span className="bg-gradient-to-r from-brand-cyan to-brand-purple bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(176,38,255,0.5)]">
+						<span className="bg-gradient-to-r from-brand-cyan to-brand-purple bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(0,168,91,0.5)]">
 							UMKM Lokal
 						</span>{" "}
 						<br className="hidden sm:block" />
@@ -42,7 +42,7 @@ export default function Hero() {
 					<div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
 						<Link
 							href="/register?type=Business"
-							className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-xl border border-brand-cyan/30 bg-brand-surface px-8 py-4 text-base font-bold text-white transition-all duration-300 hover:border-brand-cyan hover:bg-brand-dark hover:shadow-[0_0_30px_rgba(0,240,255,0.4)] sm:w-auto"
+							className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-xl border border-brand-cyan/30 bg-brand-surface px-8 py-4 text-base font-bold text-white transition-all duration-300 hover:border-brand-cyan hover:bg-brand-dark hover:shadow-[0_0_30px_rgba(0,196,110,0.4)] sm:w-auto"
 						>
 							<span className="relative z-10 flex items-center gap-2">
 								Level-Up Bisnis Anda
@@ -65,7 +65,7 @@ export default function Hero() {
 
 						<Link
 							href="/register?type=Content Creator"
-							className="group relative inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-brand-purple to-brand-pink px-8 py-4 text-base font-bold text-white shadow-[0_0_20px_rgba(176,38,255,0.3)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,0,60,0.5)] active:scale-95 sm:w-auto"
+							className="group relative inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-brand-purple to-brand-pink px-8 py-4 text-base font-bold text-white shadow-[0_0_20px_rgba(0,168,91,0.3)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,128,64,0.5)] active:scale-95 sm:w-auto"
 						>
 							<span className="relative z-10 flex items-center gap-2">
 								Mulai Jadi Kreator

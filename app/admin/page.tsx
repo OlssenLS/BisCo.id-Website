@@ -64,7 +64,7 @@ export default function AdminLoginPage() {
             <label htmlFor="securityCode" className="mb-2 block text-sm font-medium text-brand-light/85">
               Security Code
             </label>
-            <div className="group flex items-center gap-3 rounded-2xl border border-white/12 bg-brand-dark/80 px-4 py-3 transition-all focus-within:border-brand-cyan/70 focus-within:shadow-[0_0_0_3px_rgba(0,240,255,0.15)]">
+            <div className="group flex items-center gap-3 rounded-2xl border border-white/12 bg-brand-dark/80 px-4 py-3 transition-all focus-within:border-brand-cyan/70 focus-within:shadow-[0_0_0_3px_rgba(0,196,110,0.15)]">
               <svg className="h-5 w-5 text-brand-light/45 transition-colors group-focus-within:text-brand-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5s-3 1.343-3 3 1.343 3 3 3zm0 2c-2.761 0-5 2.239-5 5h10c0-2.761-2.239-5-5-5z" />
               </svg>
@@ -90,7 +90,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="group flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand-cyan to-brand-purple py-3.5 font-semibold text-brand-dark shadow-[0_10px_40px_rgba(0,240,255,0.25)] transition-all hover:brightness-110 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
+            className="group flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand-cyan to-brand-purple py-3.5 font-semibold text-brand-dark shadow-[0_10px_40px_rgba(0,196,110,0.25)] transition-all hover:brightness-110 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isLoading ? "Signing in..." : "Sign In"}
             {!isLoading ? (

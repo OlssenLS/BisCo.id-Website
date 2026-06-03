@@ -212,6 +212,7 @@ export default function AdminDashboardClient({
               ) : null}
 
               <div className="mt-4 max-h-[20rem] space-y-3 overflow-y-auto pr-2 sm:max-h-[24rem] xl:flex-1 xl:min-h-0 xl:max-h-none [scrollbar-gutter:stable] [scrollbar-width:thin] [scrollbar-color:rgba(229,229,229,0.28)_rgba(255,255,255,0.04)] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-[rgba(10,10,10,0.9)] [&::-webkit-scrollbar-thumb]:bg-[linear-gradient(180deg,rgba(0,240,255,0.55),rgba(176,38,255,0.55))] [&::-webkit-scrollbar-thumb:hover]:bg-[linear-gradient(180deg,rgba(0,240,255,0.75),rgba(176,38,255,0.75))]">
+                <div className="mt-4 max-h-[20rem] space-y-3 overflow-y-auto pr-2 sm:max-h-[24rem] xl:flex-1 xl:min-h-0 xl:max-h-none [scrollbar-gutter:stable] [scrollbar-width:thin] [scrollbar-color:rgba(229,229,229,0.28)_rgba(255,255,255,0.04)] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-[rgba(10,10,10,0.9)] [&::-webkit-scrollbar-thumb]:bg-[linear-gradient(180deg,rgba(0,196,110,0.55),rgba(0,168,91,0.55))] [&::-webkit-scrollbar-thumb:hover]:bg-[linear-gradient(180deg,rgba(0,196,110,0.75),rgba(0,168,91,0.75))]">
                 {!isOverviewLoading && (overview?.recentUsers.length ?? 0) === 0 ? (
                   <p className="rounded-xl border border-white/10 bg-brand-dark/50 px-4 py-3 text-sm text-brand-light/70">
                     No registered users yet.
@@ -272,6 +273,7 @@ export default function AdminDashboardClient({
                     </div>
                   </div>
                 ))}
+                </div>
               </div>
             </article>
 
@@ -372,7 +374,7 @@ export default function AdminDashboardClient({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full rounded-xl bg-gradient-to-r from-brand-cyan to-brand-purple py-3.5 text-base font-semibold text-brand-dark shadow-[0_10px_30px_rgba(0,240,255,0.22)] transition-all hover:brightness-110 active:scale-[0.99]"
+                  className="w-full rounded-xl bg-gradient-to-r from-brand-cyan to-brand-purple py-3.5 text-base font-semibold text-brand-dark shadow-[0_10px_30px_rgba(0,196,110,0.22)] transition-all hover:brightness-110 active:scale-[0.99]"
                 >
                   {isSubmitting ? "Registering..." : "Register User"}
                 </button>

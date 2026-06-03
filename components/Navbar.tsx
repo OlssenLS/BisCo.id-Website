@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import RegistrationPopup, { type RegistrationTarget } from "@/components/RegistrationPopup";
 
@@ -15,36 +16,22 @@ export default function Navbar() {
 			<nav className="fixed top-0 z-50 w-full border-b border-white/10 bg-brand-dark/80 backdrop-blur-lg transition-all duration-300">
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 				<div className="flex h-20 items-center justify-between">
-					<Link
-						href="/"
-						className="group flex cursor-pointer items-center gap-2 flex-shrink-0"
-					>
-						<div className="flex h-8 w-8 items-center justify-center rounded bg-gradient-to-br from-brand-cyan to-brand-purple shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(176,38,255,0.6)]">
-							<svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth="2"
-									d="M13 10V3L4 14h7v7l9-11h-7z"
-								/>
-							</svg>
-						</div>
-						<span className="bg-gradient-to-r from-white to-brand-light bg-clip-text text-xl font-bold tracking-wide text-transparent transition-all duration-300 group-hover:from-brand-cyan group-hover:to-brand-purple">
-							BisCo.id
-						</span>
+					<Link href="/" className="group flex cursor-pointer items-center gap-3 flex-shrink-0">
+						<Image src="/bisco-logo.png" alt="BisCo.id" width={40} height={40} className="object-contain" />
+						<span className="text-xl font-bold tracking-tight text-brand-light">BisCo.id</span>
 					</Link>
 
 					{/* Desktop navigation */}
 					<div className="hidden items-center space-x-8 md:flex">
 						<Link
 							href={creatorsHref}
-							className="text-sm font-medium text-brand-light transition-all duration-300 hover:text-brand-cyan hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.8)]"
+							className="text-sm font-medium text-brand-light transition-all duration-300 hover:text-brand-cyan hover:drop-shadow-[0_0_8px_rgba(0,196,110,0.8)]"
 						>
 							Creators
 						</Link>
 						<Link
 							href="/#about-us"
-							className="text-sm font-medium text-brand-light transition-all duration-300 hover:text-brand-purple hover:drop-shadow-[0_0_8px_rgba(176,38,255,0.8)]"
+							className="text-sm font-medium text-brand-light transition-all duration-300 hover:text-brand-purple hover:drop-shadow-[0_0_8px_rgba(0,168,91,0.8)]"
 						>
 							About Us
 						</Link>
@@ -109,7 +96,7 @@ export default function Navbar() {
 
 						<Link
 							href="/contact"
-							className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-white/10 bg-brand-surface px-6 py-2.5 text-sm font-bold text-white transition-all duration-300 hover:border-brand-cyan/50 hover:bg-brand-dark hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]"
+							className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-white/10 bg-brand-surface px-6 py-2.5 text-sm font-bold text-white transition-all duration-300 hover:border-brand-cyan/50 hover:bg-brand-dark hover:shadow-[0_0_20px_rgba(0,196,110,0.3)]"
 						>
 							<span className="relative z-10">Contact Us</span>
 							<div className="absolute inset-0 h-full w-full bg-gradient-to-r from-brand-cyan/20 to-brand-purple/20 opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100" />
@@ -117,7 +104,7 @@ export default function Navbar() {
 
 						<Link
 							href="/login"
-							className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-white/10 bg-brand-surface px-6 py-2.5 text-sm font-bold text-white transition-all duration-300 hover:border-brand-pink/50 hover:bg-brand-dark hover:shadow-[0_0_20px_rgba(240,0,0,0.3)]"
+							className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-white/10 bg-brand-surface px-6 py-2.5 text-sm font-bold text-white transition-all duration-300 hover:border-brand-pink/50 hover:bg-brand-dark hover:shadow-[0_0_20px_rgba(0,128,64,0.3)]"
 						>
 							<span className="relative z-10">Login</span>
 							<div className="absolute inset-0 h-full w-full bg-gradient-to-r from-brand-pink/20 to-brand-purple/20 opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100" />

@@ -25,7 +25,7 @@ export default function ContactPage() {
           {/* Left info cards */}
           <div className="space-y-6 lg:col-span-5">
             <div className="group flex items-start gap-5 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_4px_30px_rgba(0,0,0,0.2)] backdrop-blur-md transition-all duration-300 hover:border-brand-cyan/50 hover:bg-white/10">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-cyan/10 text-brand-cyan shadow-[0_0_15px_rgba(0,240,255,0.2)] transition-transform duration-300 group-hover:scale-110">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-cyan/10 text-brand-cyan shadow-[0_0_15px_rgba(0,196,110,0.2)] transition-transform duration-300 group-hover:scale-110">
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
@@ -46,7 +46,7 @@ export default function ContactPage() {
             </div>
 
             <div className="group flex items-start gap-5 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_4px_30px_rgba(0,0,0,0.2)] backdrop-blur-md transition-all duration-300 hover:border-brand-purple/50 hover:bg-white/10">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-purple/10 text-brand-purple shadow-[0_0_15px_rgba(176,38,255,0.2)] transition-transform duration-300 group-hover:scale-110">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-purple/10 text-brand-purple shadow-[0_0_15px_rgba(0,168,91,0.2)] transition-transform duration-300 group-hover:scale-110">
                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
@@ -73,7 +73,7 @@ export default function ContactPage() {
             </div>
 
             <div className="group flex items-start gap-5 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_4px_30px_rgba(0,0,0,0.2)] backdrop-blur-md transition-all duration-300 hover:border-brand-pink/50 hover:bg-white/10">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-pink/10 text-brand-pink shadow-[0_0_15px_rgba(255,0,60,0.2)] transition-transform duration-300 group-hover:scale-110">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-pink/10 text-brand-pink shadow-[0_0_15px_rgba(0,128,64,0.2)] transition-transform duration-300 group-hover:scale-110">
                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
@@ -88,19 +88,19 @@ export default function ContactPage() {
                 <div className="mt-3 flex gap-4">
                   <a
                     href="#"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-brand-surface text-white transition-all hover:border-brand-cyan hover:text-brand-cyan hover:shadow-[0_0_10px_rgba(0,240,255,0.4)]"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-brand-surface text-white transition-all hover:border-brand-cyan hover:text-brand-cyan hover:shadow-[0_0_10px_rgba(0,196,110,0.4)]"
                   >
                     IG
                   </a>
                   <a
                     href="#"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-brand-surface text-white transition-all hover:border-brand-purple hover:text-brand-purple hover:shadow-[0_0_10px_rgba(176,38,255,0.4)]"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-brand-surface text-white transition-all hover:border-brand-purple hover:text-brand-purple hover:shadow-[0_0_10px_rgba(0,168,91,0.4)]"
                   >
                     TT
                   </a>
                   <a
                     href="#"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-brand-surface text-white transition-all hover:border-brand-pink hover:text-brand-pink hover:shadow-[0_0_10px_rgba(255,0,60,0.4)]"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-brand-surface text-white transition-all hover:border-brand-pink hover:text-brand-pink hover:shadow-[0_0_10px_rgba(0,128,64,0.4)]"
                   >
                     LI
                   </a>
@@ -189,7 +189,7 @@ export default function ContactPage() {
 
                 <button
                   type="submit"
-                  className="w-full rounded-xl bg-gradient-to-r from-brand-cyan to-brand-purple py-4 text-lg font-bold text-white shadow-[0_0_20px_rgba(0,240,255,0.2)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(176,38,255,0.5)] active:scale-95"
+                  className="w-full rounded-xl bg-gradient-to-r from-brand-cyan to-brand-purple py-4 text-lg font-bold text-white shadow-[0_0_20px_rgba(0,196,110,0.2)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(0,168,91,0.5)] active:scale-95"
                 >
                   Kirim Pesan Sekarang
                 </button>

@@ -10,6 +10,11 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "BisCo.id",
   description: "Personalized business and content creator management platform",
+  icons: {
+    icon: "/bisco-logo.png",
+    shortcut: "/bisco-logo.png",
+    apple: "/bisco-logo.png",
+  },
 };
 
 export default function RootLayout({

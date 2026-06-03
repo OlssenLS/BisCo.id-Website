@@ -103,11 +103,11 @@ export default function CreatorPage() {
 
         {/* Creator cards */}
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {creators.map((creator, index) => (
+            {creators.map((creator, index) => (
             <button
               type="button"
               key={creator.id}
-              className={`group relative overflow-hidden rounded-[28px] border border-white/10 bg-brand-surface/80 text-left opacity-0 shadow-[0_16px_35px_rgba(2,6,23,0.35)] ${creator.className} animate-[creatorCardIn_0.7s_ease-out_forwards] motion-reduce:translate-y-0 motion-reduce:scale-100 motion-reduce:opacity-100 motion-reduce:animate-none hover:-translate-y-1 hover:border-brand-cyan/40 hover:shadow-[0_24px_60px_rgba(0,240,255,0.18)] active:translate-y-0 active:scale-[0.985] active:shadow-[0_22px_65px_rgba(176,38,255,0.35)]`}
+              className={`group relative overflow-hidden rounded-[28px] border border-white/10 bg-brand-surface/80 text-left opacity-0 shadow-[0_16px_35px_rgba(2,6,23,0.35)] ${creator.className} animate-[creatorCardIn_0.7s_ease-out_forwards] motion-reduce:translate-y-0 motion-reduce:scale-100 motion-reduce:opacity-100 motion-reduce:animate-none hover:-translate-y-1 hover:border-brand-cyan/40 hover:shadow-[0_24px_60px_rgba(0,196,110,0.18)] active:translate-y-0 active:scale-[0.985] active:shadow-[0_22px_65px_rgba(0,168,91,0.35)]`}
               style={{ animationDelay: `${index * 70}ms` }}
             >
               <div className={`pointer-events-none absolute inset-0 bg-gradient-to-b ${creator.accent}`} />
@@ -123,10 +123,10 @@ export default function CreatorPage() {
               </div>
 
               <div className="absolute bottom-4 left-4 right-4 z-10">
-                <p className="mb-2 text-xl font-bold text-brand-light drop-shadow-[0_0_16px_rgba(0,240,255,0.16)]">
+                <p className="mb-2 text-xl font-bold text-brand-light drop-shadow-[0_0_16px_rgba(0,196,110,0.16)]">
                   {creator.name}
                 </p>
-                <div className="inline-flex items-center rounded-full border border-brand-cyan/40 bg-black/55 px-4 py-2 text-sm font-semibold text-brand-cyan shadow-[0_0_22px_rgba(0,240,255,0.2)] backdrop-blur-sm">
+                <div className="inline-flex items-center rounded-full border border-brand-cyan/40 bg-black/55 px-4 py-2 text-sm font-semibold text-brand-cyan shadow-[0_0_22px_rgba(0,196,110,0.2)] backdrop-blur-sm">
                   {creator.subscribers}
                 </div>
               </div>

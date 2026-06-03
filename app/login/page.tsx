@@ -196,7 +196,7 @@ function LoginForm() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full rounded-xl bg-gradient-to-r from-brand-cyan to-brand-purple py-3.5 text-base font-semibold text-brand-dark shadow-[0_10px_30px_rgba(0,240,255,0.22)] transition-all hover:brightness-110 disabled:opacity-60"
+              className="w-full rounded-xl bg-gradient-to-r from-brand-cyan to-brand-purple py-3.5 text-base font-semibold text-brand-dark shadow-[0_10px_30px_rgba(0,196,110,0.22)] transition-all hover:brightness-110 disabled:opacity-60"
             >
               {isLoading ? "Signing in..." : "Login"}
             </button>

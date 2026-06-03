@@ -11,37 +11,37 @@ const companies: Company[] = [
 		name: "LocalBite",
 		path: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5",
 		hoverClass: "hover:text-brand-cyan",
-		glowClass: "group-hover/logo:drop-shadow-[0_0_8px_rgba(0,240,255,0.8)]",
+		glowClass: "group-hover/logo:drop-shadow-[0_0_8px_rgba(0,196,110,0.8)]",
 	},
 	{
 		name: "KopiKenangan",
 		path: "M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9l-7-7z",
 		hoverClass: "hover:text-brand-purple",
-		glowClass: "group-hover/logo:drop-shadow-[0_0_8px_rgba(176,38,255,0.8)]",
+		glowClass: "group-hover/logo:drop-shadow-[0_0_8px_rgba(0,168,91,0.8)]",
 	},
 	{
 		name: "Tokopedia",
 		path: "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z",
 		hoverClass: "hover:text-brand-pink",
-		glowClass: "group-hover/logo:drop-shadow-[0_0_8px_rgba(255,0,60,0.8)]",
+		glowClass: "group-hover/logo:drop-shadow-[0_0_8px_rgba(0,128,64,0.8)]",
 	},
 	{
 		name: "Gojek",
 		path: "M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7",
 		hoverClass: "hover:text-brand-cyan",
-		glowClass: "group-hover/logo:drop-shadow-[0_0_8px_rgba(0,240,255,0.8)]",
+		glowClass: "group-hover/logo:drop-shadow-[0_0_8px_rgba(0,196,110,0.8)]",
 	},
 	{
 		name: "Flip",
 		path: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
 		hoverClass: "hover:text-brand-purple",
-		glowClass: "group-hover/logo:drop-shadow-[0_0_8px_rgba(176,38,255,0.8)]",
+		glowClass: "group-hover/logo:drop-shadow-[0_0_8px_rgba(0,168,91,0.8)]",
 	},
 	{
 		name: "Majoo",
 		path: "M13 10V3L4 14h7v7l9-11h-7z",
 		hoverClass: "hover:text-brand-pink",
-		glowClass: "group-hover/logo:drop-shadow-[0_0_8px_rgba(255,0,60,0.8)]",
+		glowClass: "group-hover/logo:drop-shadow-[0_0_8px_rgba(0,128,64,0.8)]",
 	},
 ];
 
