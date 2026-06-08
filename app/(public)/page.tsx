@@ -38,7 +38,7 @@ export default function Home() {
             </p>
 
             <a
-              href="/contact"
+              href="https://forms.gle/pYAT1DijXKksBPLs5"
               className="group mt-10 inline-flex items-center gap-3 self-start rounded-full border border-brand-cyan/30 bg-brand-surface px-6 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-brand-cyan hover:bg-brand-dark hover:shadow-[0_0_30px_rgba(0,196,110,0.35)]"
             >
               <span className="relative z-10">Send Feedback</span>
