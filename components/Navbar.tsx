@@ -9,6 +9,7 @@ export default function Navbar() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [registrationTarget, setRegistrationTarget] = useState<RegistrationTarget | null>(null);
 	const creatorsHref = "/ourcreators";
+	const feedbackHref = "/#feedback-section";
 
 	return (
 		<>
@@ -34,6 +35,12 @@ export default function Navbar() {
 							className="text-sm font-medium text-brand-light transition-all duration-300 hover:text-brand-purple hover:drop-shadow-[0_0_8px_rgba(0,168,91,0.8)]"
 						>
 							About Us
+						</Link>
+						<Link
+							href={feedbackHref}
+							className="text-sm font-medium text-brand-light transition-all duration-300 hover:text-brand-cyan hover:drop-shadow-[0_0_8px_rgba(0,196,110,0.8)]"
+						>
+							Feedback
 						</Link>
 
 						{/* dropdown buat responsive */}
@@ -152,6 +159,13 @@ export default function Navbar() {
 						className="block rounded-xl px-4 py-3 text-base font-semibold text-brand-light transition-all hover:bg-brand-dark hover:text-brand-purple"
 					>
 						About Us
+					</Link>
+					<Link
+						href={feedbackHref}
+						onClick={() => setIsMenuOpen(false)}
+						className="block rounded-xl px-4 py-3 text-base font-semibold text-brand-light transition-all hover:bg-brand-dark hover:text-brand-cyan"
+					>
+						Feedback
 					</Link>
 
 					<div className="mt-4 border-t border-white/10 pt-3 pb-2">
